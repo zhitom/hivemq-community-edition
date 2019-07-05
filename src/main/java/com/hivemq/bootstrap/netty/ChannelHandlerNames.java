@@ -110,7 +110,7 @@ public class ChannelHandlerNames {
 
     public static final String PLUGIN_INITIALIZER_HANDLER = "plugin_initializer_handler";
     public static final String CLIENT_LIFECYCLE_EVENT_HANDLER = "client_lifecycle_event_handler";
-    public static final String CONNECT_INTERCEPTOR_HANDLER = "connect_interceptor_handler";
+    public static final String CONNECT_INBOUND_INTERCEPTOR_HANDLER = "connect_inbound_interceptor_handler";
 
     /* *************
      *     Misc    *
