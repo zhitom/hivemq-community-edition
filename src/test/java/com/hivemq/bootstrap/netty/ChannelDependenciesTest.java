@@ -23,6 +23,7 @@ import com.hivemq.codec.encoder.EncoderFactory;
 import com.hivemq.configuration.service.FullConfigurationService;
 import com.hivemq.configuration.service.RestrictionsConfigurationService;
 import com.hivemq.extensions.handler.ClientLifecycleEventHandler;
+import com.hivemq.extensions.handler.ConnectInterceptorHandler;
 import com.hivemq.extensions.handler.IncomingPublishHandler;
 import com.hivemq.extensions.handler.PluginInitializerHandler;
 import com.hivemq.logging.EventLog;
@@ -159,6 +160,8 @@ public class ChannelDependenciesTest {
     @Mock
     private IncomingSubscribeHandler incomingSubscribeHandler;
 
+    @Mock
+    private ConnectInterceptorHandler connectInterceptorHandler;
 
     @Before
     public void setUp() throws Exception {
@@ -197,7 +200,8 @@ public class ChannelDependenciesTest {
                 () -> clientLifecycleEventHandler,
                 () -> incomingPublishHandler,
                 () -> incomingSubscribeHandler,
-                () -> publishMessageExpiryHandler);
+                () -> publishMessageExpiryHandler,
+                connectInterceptorHandler);
 
     }
 
