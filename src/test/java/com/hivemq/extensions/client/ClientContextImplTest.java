@@ -17,6 +17,7 @@
 package com.hivemq.extensions.client;
 
 import com.hivemq.extension.sdk.api.interceptor.publish.PublishInboundInterceptor;
+import com.hivemq.extension.sdk.api.interceptor.subscribe.SubscribeInboundInterceptor;
 import com.hivemq.extensions.HiveMQExtensions;
 import com.hivemq.extensions.packets.general.ModifiableDefaultPermissionsImpl;
 import org.junit.Before;
@@ -44,9 +45,12 @@ public class ClientContextImplTest {
 
         clientContext.addPublishInboundInterceptor((input, output) -> {
         });
+        clientContext.addSubscribeInboundInterceptor((input, output) -> {
+        });
 
-        assertEquals(1, clientContext.getAllInterceptors().size());
+        assertEquals(2, clientContext.getAllInterceptors().size());
         assertEquals(1, clientContext.getPublishInboundInterceptors().size());
+        assertEquals(1, clientContext.getSubscribeInboundInterceptors().size());
 
 
     }
@@ -63,6 +67,24 @@ public class ClientContextImplTest {
 
         assertEquals(0, clientContext.getAllInterceptors().size());
         assertEquals(0, clientContext.getPublishInboundInterceptors().size());
+
+    }
+
+    @Test
+    public void test_add_remove_specific_subscribe() {
+
+
+        final SubscribeInboundInterceptor subscribeInboundInterceptor = (input, output) -> {
+        };
+
+        clientContext.addPublishInboundInterceptor((input, output) -> {
+        });
+        clientContext.addSubscribeInboundInterceptor(subscribeInboundInterceptor);
+        clientContext.removeSubscribeInboundInterceptor(subscribeInboundInterceptor);
+
+        assertEquals(1, clientContext.getAllInterceptors().size());
+        assertEquals(0, clientContext.getSubscribeInboundInterceptors().size());
+        assertEquals(1, clientContext.getPublishInboundInterceptors().size());
 
     }
 }
